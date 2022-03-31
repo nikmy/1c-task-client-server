@@ -99,7 +99,7 @@ func main() {
 
 		if err != nil {
 			log.Println(err.Error())
-			return
+			continue
 		}
 
 		go serveClient(client, nextId, f, &mu)

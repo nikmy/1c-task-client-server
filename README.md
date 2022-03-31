@@ -19,3 +19,10 @@ Type message and press `Enter`, it will be sent to a server and written in log f
 
 - `make` in repository directory
 - Executables will be available in `build/` dir
+
+## Execution Policy
+
+- Server accept new connection in endless loop
+- The only way to stop it is to send SIGINT from console or SIGKILL
+- If main loop is interrupted, all goroutines are serving clients will be stopped immediately
+- If server disconnect, client will see `error: broken pipe` when trying to send message 
