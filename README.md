@@ -16,7 +16,8 @@ Type `goserver help` or `goclient help` for help.
 Type message and press `Enter`, it will be sent to a server and written in log file. Type `\exit` to exit session.
 
 ## Build
-
+- **requirement:** installed `go 1.17` or higher
+- Makefile for UNIX
 - `make` in repository directory
 - Executables will be available in `build/` dir
 

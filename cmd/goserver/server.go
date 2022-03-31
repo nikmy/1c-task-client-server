@@ -25,7 +25,7 @@ func init() {
 	logfile = flag.String("f", "history.msg", "File for messages")
 }
 
-func serveClient(conn net.Conn, id int, f *os.File, mu *sync.Mutex) {
+func serveClient(conn net.Conn, id uint64, f *os.File, mu *sync.Mutex) {
 	log.Printf("New client with id %d connected\n", id)
 	defer func(conn net.Conn) {
 		err := conn.Close()
@@ -35,7 +35,7 @@ func serveClient(conn net.Conn, id int, f *os.File, mu *sync.Mutex) {
 		log.Printf("Connection with client %d has been closed\n", id)
 	}(conn)
 
-	header := []byte(strconv.Itoa(id) + ":")
+	header := []byte(strconv.FormatUint(id, 10) + ":")
 	for {
 		buff := make([]byte, 4096)
 		_, err := conn.Read(buff)
@@ -91,7 +91,7 @@ func main() {
 		return
 	}
 
-	nextId := 0
+	var nextId uint64 = 0
 	var mu sync.Mutex
 
 	for {
